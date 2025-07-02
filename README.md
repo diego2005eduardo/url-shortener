@@ -7,7 +7,7 @@ A simple URL shortening service with 7-day expiration, built with Node.js, Expre
 
 #### Redirect the user to the original site (browser only)
 
-```http
+```bash
   GET /:shortUrl
 ```
 
@@ -17,7 +17,7 @@ Example: yourdomain.com/abcdef
 
 #### Generate a shortened URL
 
-```http
+```bash
   POST /shortenUrl?url=
 ```
 
