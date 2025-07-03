@@ -58,6 +58,10 @@ async function generateShortenURL(url: any): Promise<string> {
     return shortUrl;
 }
 
+async function removeUrlDatabase(url: any): Promise<any> {
+    const result = await collection.deleteOne(url);
+    return result;
+}
 async function verifyUrlInDatabase(shortUrl: string): Promise<Url | null> {
     const result = await collection.findOne({ shortUrl });
     return result || null;
@@ -89,6 +93,7 @@ app.get('/:shortUrl', (async (req: Request, res: Response) => {
     }
 
     if (result.expiresAt < new Date()) {
+        await removeUrlDatabase(result.url);
         return res.status(410).send('This URL has expired.');
     }
 
